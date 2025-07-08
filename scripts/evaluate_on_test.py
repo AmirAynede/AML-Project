@@ -94,6 +94,7 @@ def evaluate_model(model_path=None, data_path="data/lc25000_split", batch_size=3
     # If num_classes not specified, infer from folders
     if num_classes is None:
         num_classes = len(class_names)
+    print(f"✅ Detected {num_classes} classes: {class_names}")
 
     # Load model path if not given
     if model_path is None:
@@ -136,4 +137,4 @@ def evaluate_model(model_path=None, data_path="data/lc25000_split", batch_size=3
     plt.show()
 
 if __name__ == "__main__":
-    evaluate_model(num_classes=5)
+    evaluate_model()
