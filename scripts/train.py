@@ -83,7 +83,7 @@ def train_model(model, train_loader, val_loader, num_epochs, save_path, device):
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
-    data_path = "data/Lung_and_Colon_Cancer"
+    data_path = "data/lc25000_split"
     train_loader, val_loader, _, class_names = prepare_dataloaders(data_path)
 
     model = build_model(num_classes=len(class_names)).to(device)
