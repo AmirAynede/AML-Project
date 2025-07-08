@@ -1,0 +1,51 @@
+name: Run full ML pipeline
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Download LC25000 dataset
+        run: |
+          wget -O LC25000.zip "https://academictorrents.com/download/7a638ed187a6180fd6e464b3666a6ea0499af4af"
+          unzip -q LC25000.zip -d data/
+        
+      - name: Split the dataset
+        run: python3 scripts/split_dataset.py
+
+      - name: Train the model
+        run: python3 -m scripts.train
+
+      - name: Evaluate on test set
+        run: python3 -m scripts.evaluate_on_test
+
+      - name: Generate Grad‑CAM for a sample image
+        run: python3 -m scripts.gradcam --image_path data/lc25000_split/test/lung_aca/lungaca492.jpeg
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ml-results
+          path: |
+            saved_models/
+            results/
+            outputs/
