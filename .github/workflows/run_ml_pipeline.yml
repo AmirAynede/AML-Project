@@ -53,6 +53,12 @@ jobs:
       - name: Split the dataset
         run: python3 scripts/split_dataset.py
 
+      - name: Upload split dataset as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lc25000-split
+          path: data/lc25000_split/
+
       - name: Train the model
         run: python3 -m scripts.train
 
