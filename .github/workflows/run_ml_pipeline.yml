@@ -62,11 +62,23 @@ jobs:
       - name: Train the model
         run: python3 -m scripts.train
 
+      - name: Upload best model artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: best-model
+          path: saved_models/
+
       - name: Evaluate on test set
         run: python3 -m scripts.evaluate_on_test
 
       - name: Generate Grad‑CAM for a sample image
         run: python3 -m scripts.gradcam --image_path data/lc25000_split/test/lung_aca/lungaca492.jpeg
+
+      - name: Upload evaluation and Grad‑CAM outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-gradcam-results
+          path: outputs/
 
       - name: Save artifacts
         uses: actions/upload-artifact@v4
