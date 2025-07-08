@@ -4,7 +4,8 @@ import random
 from pathlib import Path
 
 # Original dataset folder
-SOURCE_DIR = Path("data/Lung_and_Colon_Cancer")
+COLON_SOURCE_DIR = Path("data/Lung_and_Colon_Cancer/lung_colon_image_set/colon_image_sets")
+LUNG_SOURCE_DIR = Path("data/Lung_and_Colon_Cancer/lung_colon_image_set/lung_image_sets")
 TARGET_DIR = Path("data/lc25000_split")
 SPLITS = ["train", "val", "test"]
 SPLIT_RATIOS = [0.7, 0.15, 0.15]  # 70/15/15 split
