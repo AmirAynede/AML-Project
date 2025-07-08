@@ -16,7 +16,7 @@ def create_split_dirs(classes):
             split_dir = TARGET_DIR / split / class_name
             split_dir.mkdir(parents=True, exist_ok=True)
 
-def split_data():
+def split_data(SOURCE_DIR):
     class_dirs = [d for d in SOURCE_DIR.iterdir() if d.is_dir()]
     classes = [d.name for d in class_dirs]
 
@@ -44,5 +44,6 @@ def split_data():
 
 if __name__ == "__main__":
     random.seed(42)
-    split_data()
+    split_data(COLON_SOURCE_DIR)
+    split_data(LUNG_SOURCE_DIR)
     print("✅ Dataset split completed!")
