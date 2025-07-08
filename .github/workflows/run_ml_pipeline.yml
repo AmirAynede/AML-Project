@@ -24,10 +24,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
 
-      - name: Download LC25000 dataset
+      - name: Install dependencies
+        run: pip install kagglehub
+
+      - name: Download dataset from Kaggle
         run: |
-          wget -O LC25000.zip "https://academictorrents.com/download/7a638ed187a6180fd6e464b3666a6ea0499af4af"
-          unzip -q LC25000.zip -d data/
+          python -c "
+          import kagglehub
+          path = kagglehub.dataset_download('andrewmvd/lung-and-colon-cancer-histopathological-images')
+          print('Path to dataset files:', path)
+          "
         
       - name: Split the dataset
         run: python3 scripts/split_dataset.py
