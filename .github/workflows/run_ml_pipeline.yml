@@ -36,12 +36,20 @@ jobs:
           echo "{\"username\":\"${{ secrets.KAGGLE_USERNAME }}\",\"key\":\"${{ secrets.KAGGLE_KEY }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
 
-      - name: Download and unzip dataset from Kaggle
+      - name: Download dataset from Kaggle
         run: |
           mkdir -p data
           kaggle datasets download andrewmvd/lung-and-colon-cancer-histopathological-images -p data/
-          unzip data/lung-and-colon-cancer-histopathological-images.zip -d data/Lung_and_Colon_Cancer
-        
+
+      - name: List files after download
+        run: ls -lh data
+
+      - name: Unzip dataset
+        run: unzip data/*.zip -d data/Lung_and_Colon_Cancer
+
+      - name: List files after unzip
+        run: ls -lhR data/Lung_and_Colon_Cancer
+
       - name: Split the dataset
         run: python3 scripts/split_dataset.py
 
