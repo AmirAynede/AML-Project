@@ -27,13 +27,20 @@ jobs:
       - name: Install dependencies
         run: pip install kagglehub
 
-      - name: Download dataset from Kaggle
+      - name: Install Kaggle CLI
+        run: pip install kaggle
+
+      - name: Set up Kaggle credentials
         run: |
-          python -c "
-          import kagglehub
-          path = kagglehub.dataset_download('andrewmvd/lung-and-colon-cancer-histopathological-images')
-          print('Path to dataset files:', path)
-          "
+          mkdir -p ~/.kaggle
+          echo "{\"username\":\"${{ secrets.KAGGLE_USERNAME }}\",\"key\":\"${{ secrets.KAGGLE_KEY }}\"}" > ~/.kaggle/kaggle.json
+          chmod 600 ~/.kaggle/kaggle.json
+
+      - name: Download and unzip dataset from Kaggle
+        run: |
+          mkdir -p data
+          kaggle datasets download andrewmvd/lung-and-colon-cancer-histopathological-images -p data/
+          unzip data/lung-and-colon-cancer-histopathological-images.zip -d data/Lung_and_Colon_Cancer
         
       - name: Split the dataset
         run: python3 scripts/split_dataset.py
