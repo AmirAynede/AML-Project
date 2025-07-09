@@ -90,7 +90,10 @@ if __name__ == "__main__":
     )
 
     model = build_model(num_classes=len(class_names)).to(device)
-
+    # 🔍 Log model architecture and final layer shape
+    print(model)
+    print(f"✅ Model output layer shape: {model.fc.in_features} → {len(class_names)} classes")
+    
     num_epochs = 10  # You can adjust this
 
     # Create timestamp for saving
@@ -134,3 +137,8 @@ if __name__ == "__main__":
     with open(f"results/training_metrics_{timestamp}.json", "w") as f:
         json.dump(metrics, f)
     print(f"✅ Saved training metrics to results/training_metrics_{timestamp}.json")
+
+    # Save class names to results
+    with open("results/class_names.json", "w") as f:
+        json.dump(class_names, f)
+    print("✅ Saved class label names to results/class_names.json")
