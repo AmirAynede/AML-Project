@@ -70,6 +70,12 @@ jobs:
         with:
           name: best-model
           path: saved_models/
+          
+      - name: Upload class names JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: class-names
+          path: results/class_names.json
 
       - name: Evaluate on test set
         run: python3 -m scripts.evaluate_on_test
@@ -83,7 +89,7 @@ jobs:
           name: eval-gradcam-results
           path: outputs/
 
-      - name: Save artifacts
+      - name: Save all final artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ml-results
