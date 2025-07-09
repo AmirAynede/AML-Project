@@ -84,7 +84,10 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
     data_path = "data/lc25000_split"
-    train_loader, val_loader, _, class_names = prepare_dataloaders(data_path)
+    train_loader, val_loader, _, class_names = prepare_dataloaders(
+        data_path=os.path.join(data_path, "train"), 
+        val_path=os.path.join(data_path, "val")
+    )
 
     model = build_model(num_classes=len(class_names)).to(device)
 
