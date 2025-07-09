@@ -88,8 +88,8 @@ if __name__ == "__main__":
     val_path = os.path.join(data_path, "val")
 
     train_loader, val_loader, _, class_names = prepare_dataloaders(
-    train_path=train_path,
-    val_path=val_path
+    train_path,
+    val_path
     )
 
     model = build_model(num_classes=len(class_names)).to(device)
