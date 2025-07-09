@@ -87,10 +87,16 @@ def evaluate_model(model_path=None, data_path="data/lc25000_split", batch_size=3
                           else "mps" if torch.backends.mps.is_available()
                           else "cpu")
 
-    # Prepare dataloaders; get test loader and classes only
+    # Prepare test loader with dummy train/val paths to satisfy function signature
     test_data_path = os.path.join(data_path, "test")
-    _, _, test_loader, class_names = prepare_dataloaders(test_data_path, batch_size=batch_size)
-
+    dummy_path = os.path.join(data_path, "train")  # Only needed to pass into the function
+    _, _, test_loader, class_names = prepare_dataloaders(
+        train_path=dummy_path,
+        val_path=dummy_path,
+        test_path=test_data_path,
+        batch_size=batch_size
+    )
+  
     # If num_classes not specified, infer from folders
     if num_classes is None:
         num_classes = len(class_names)
