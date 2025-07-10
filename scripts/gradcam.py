@@ -178,7 +178,7 @@ def main(image_path, model_path, layer_name = "layer4.1.conv2", num_classes=5, o
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image_path', type=str, required=False, help="Path to test image (optional, will select random if not provided)")
+    parser.add_argument('--image_path', type=str, required=False, help="Optional path to test image (will randomly select one if not provided)")
     parser.add_argument('--model_path', type=str, default=None, help="Path to trained model")
     parser.add_argument('--layer_name', type=str, default="layer4.1.conv2", help="Model layer to inspect")
     parser.add_argument('--num_classes', type=int, default=5, help="Number of output classes")
@@ -188,11 +188,10 @@ if __name__ == "__main__":
     import random
     if args.image_path is None:
         candidates = glob.glob("data/lc25000_split/test/*/*.jpeg")
-        if candidates:
-            args.image_path = random.choice(candidates)
-            print(f"🔍 Randomly selected image for Grad-CAM: {args.image_path}")
-        else:
-            raise FileNotFoundError("❌ No .jpeg images found in test dataset for Grad-CAM.")
+        if not candidates:
+            raise FileNotFoundError("❌ No test images found for Grad-CAM.")
+        args.image_path = random.choice(candidates)
+        print(f"🔍 No image_path provided. Using random image: {args.image_path}")
 	
     if args.model_path is None:
         args.model_path = find_latest_model()
