@@ -1,4 +1,4 @@
-# AML-Project: Lung & Colon Cancer Histopathological Image Classification
+# AML-Project: Lung & Colon Cancer Histopathological Image Classification (Automated Pipeline)
 
 [![CI](https://github.com/AmirAynede/AML-Project/actions/workflows/run_ml_pipeline.yml/badge.svg)]()
 [![Citation](https://img.shields.io/badge/Citation-CFF-lightgrey?style=flat-square&logo=academia&logoColor=black)](https://github.com/AmirAynede/LC25000-Cancer-Classification/blob/main/CITATION.cff)
