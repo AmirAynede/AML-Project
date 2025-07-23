@@ -135,6 +135,8 @@ On every push to main (or via manual dispatch), the workflow will:
 
 7.Upload all artifacts (`lc25000-split`, `best-model`, `class-names`, `eval-gradcam-results`, and consolidated `ml-results`)
 
+To see the artifacts follow this [link](https://github.com/AmirAynede/AML-Project/actions/runs/16198342699)
+
 You can monitor pipeline runs on the [Actions tab](https://github.com/AmirAynede/AML-Project/actions)
 
 ---
