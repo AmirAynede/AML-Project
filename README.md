@@ -34,7 +34,7 @@ This repository contains a full end-to-end machine learning pipeline for classif
 │   ├── evaluate_on_test.py       # evaluation on held-out test set
 │   └── gradcam.py                # generate Grad-CAM visualizations
 ├── requirements.txt              # Python dependencies
-└── README.md                     # this file
+└── README.md                     
 ```
 ---
 
